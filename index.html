@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ed</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;500;700;900&family=Epilogue:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#8C98CA',
+                        secondary: '#283157',
+                        headingText: '#FFFFFF',
+                        bodyText: '#080E26',
+                    },
+                    fontFamily: {
+                        heading: ['Fraunces', 'Georgia', 'serif'],
+                        body: ['Epilogue', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * { box-sizing: border-box; }
+        body { font-family: 'Epilogue', sans-serif; background: #FFFFFF; }
+        h1, h2, h3, h4 { font-family: 'Fraunces', Georgia, serif; font-weight: 700; }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+        .faq-answer.open { max-height: 500px; }
+        .faq-chevron { transition: transform 0.3s ease; }
+        .faq-chevron.rotated { transform: rotate(180deg); }
+    </style>
+</head>
+<body class="bg-white">
+
+    <!-- SECTION 1: Hero Banner -->
+    <section class="w-full bg-secondary">
+        <div class="max-w-[1200px] mx-auto px-6 py-12 lg:py-20 lg:px-12">
+            <div class="flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
+                <!-- Left Column - Product Image -->
+                <div class="w-full lg:w-1/2 relative">
+                    <div class="relative">
+                        <img src="https://nyrslifytgbluamxpqzq.supabase.co/storage/v1/object/public/website-images/ed/hero-image.png" alt="ed product hero" class="w-full rounded-2xl object-cover aspect-[4/5]">
+                        <div class="absolute -bottom-4 left-1/2 -translate-x-1/2 bg-white border-2 border-dashed border-red-600 rounded-lg px-4 py-2 whitespace-nowrap">
+                            <span class="font-semibold text-sm text-bodyText">🚨 Head's up, we're low on stock!</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column - Content -->
+                <div class="w-full lg:w-1/2 mt-8 lg:mt-0">
+                    <!-- Star Rating -->
+                    <div class="flex items-center gap-1 mb-4">
+                        <span class="text-amber-400 text-lg">★★★★★</span>
+                        <span class="text-sm text-gray-300 ml-2 font-body">4000+ Reviews</span>
+                    </div>
+
+                    <!-- Main Heading -->
+                    <h1 class="text-3xl lg:text-4xl xl:text-5xl font-heading font-bold leading-tight mb-6 text-headingText">
+                        Your Go-To for <span class="text-primary">Style</span><br>
+                        and <span class="text-primary">Performance</span>
+                    </h1>
+
+                    <!-- Feature Badges -->
+                    <div class="flex flex-wrap items-center gap-3 mb-6">
+                        <div class="flex items-center gap-2">
+                            <svg class="w-5 h-5 text-primary" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                            <span class="font-bold text-headingText font-body">Lightweight</span>
+                        </div>
+                        <span class="text-gray-500">|</span>
+                        <div class="flex items-center gap-2">
+                            <svg class="w-5 h-5 text-primary" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                            <span class="font-bold text-headingText font-body">Durable</span>
+                        </div>
+                        <span class="text-gray-500">|</span>
+                        <div class="flex items-center gap-2">
+                            <svg class="w-5 h-5 text-primary" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                            <span class="font-bold text-headingText font-body">Breathable</span>
+                        </div>
+                    </div>
+
+                    <!-- Description -->
+                    <p class="text-base lg:text-lg font-normal leading-relaxed text-gray-300 mb-8 max-w-lg font-body">
+                        From classic low-tops to bold high-tops, we offer a variety of styles to suit every taste. Discover your new favorite pair today!
+                    </p>
+
+                    <!-- CTA Button -->
+                    <a href="ed" class="inline-flex items-center justify-between bg-primary hover:bg-opacity-90 transition-all rounded-xl px-8 py-4 w-full md:w-auto md:min-w-[320px] group">
+                        <div>
+                            <div class="font-bold uppercase text-lg text-white font-body tracking-wide">GET YOURS NOW</div>
+                            <div class="text-sm font-normal text-white opacity-80 font-body">30-Day satisfaction guarantee</div>
+                        </div>
+                        <span class="text-2xl text-white ml-4 group-hover:translate-x-1 transition-transform">→</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 2: Featured Product -->
+    <section class="w-full bg-white">
+        <div class="max-w-[1100px] mx-auto px-5 py-10 lg:py-16">
+            <div class="flex flex-col md:flex-row items-center gap-12">
+                <!-- Left Column - Product Image -->
+                <div class="w-full md:w-[45%] flex justify-center">
+                    <img src="https://nyrslifytgbluamxpqzq.supabase.co/storage/v1/object/public/website-images/ed/product-image.png" alt="ed product" class="max-w-[400px] w-full object-contain">
+                </div>
+
+                <!-- Right Column - Product Details -->
+                <div class="w-full md:w-[55%]">
+                    <!-- Rating Badge -->
+                    <div class="inline-flex items-center bg-gray-100 rounded-full px-3 py-1.5 gap-1.5">
+                        <span class="text-amber-400 text-sm">★★★★★</span>
+                        <span class="text-sm text-bodyText font-body">Rated 4.9/5 by 237 Customers</span>
+                    </div>
+
+                    <!-- Product Title -->
+                    <h2 class="text-secondary text-2xl lg:text-3xl font-heading font-bold mt-3">ed</h2>
+
+                    <!-- Price Row -->
+                    <div class="mt-2 flex items-baseline gap-2">
+                        <span class="text-[22px] font-bold text-bodyText font-body">USD ed</span>
+                        <span class="text-gray-400 font-body">(was <s>USD ed</s>)</span>
+                    </div>
+
+                    <!-- Benefits Checklist -->
+                    <div class="mt-5 space-y-2.5">
+                        <div class="flex items-center gap-2">
+                            <svg class="w-5 h-5 text-primary flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                            <span class="text-bodyText font-body">Premium quality materials</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <svg class="w-5 h-5 text-primary flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                            <span class="text-bodyText font-body">Designed for everyday use</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <svg class="w-5 h-5 text-primary flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                            <span class="text-bodyText font-body">Satisfaction guaranteed</span>
+                        </div>
+                    </div>
+
+                    <!-- Shipping Info -->
+                    <div class="mt-5 bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 flex items-center gap-2 text-[15px] font-body">
+                        <span class="w-2 h-2 rounded-full bg-green-500 flex-shrink-0"></span>
+                        <span class="text-bodyText">Ships <span class="text-green-500 font-semibold">Fast</span></span>
+                        <span class="text-gray-300">•</span>
+                        <span>🌍</span>
+                        <span class="font-bold text-bodyText">Worldwide Shipping</span>
+                    </div>
+
+                    <!-- Buy Now Button -->
+                    <a href="ed" class="mt-4 block w-full bg-primary hover:bg-opacity-90 transition-all text-white text-center text-lg font-semibold font-body rounded-lg py-4">
+                        Buy Now
+                    </a>
+
+                    <!-- Trust Badges -->
+                    <div class="mt-4 flex flex-col sm:flex-row gap-4">
+                        <div class="flex items-center gap-2">
+                            <svg class="w-5 h-5 text-secondary" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                            <span class="text-[13px] font-bold text-bodyText font-body">30-Day Money Back Guarantee</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <svg class="w-5 h-5 text-secondary" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                            <span class="text-[13px] font-bold text-bodyText font-body">Secure Checkout</span>
+                        </div>
+                    </div>
+
+                    <!-- Review Card -->
+                    <div class="mt-4 bg-gray-50 rounded-xl p-4 flex gap-4">
+                        <img src="https://nyrslifytgbluamxpqzq.supabase.co/storage/v1/object/public/website-images/ed/reviewer-avatar.png" alt="Customer review avatar" class="w-12 h-12 rounded-full object-cover flex-shrink-0">
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <span class="font-bold text-bodyText font-body">Sarah M.</span>
+                                <span class="text-amber-400 text-sm">★★★★★</span>
+                            </div>
+                            <p class="text-sm text-gray-600 mt-1 font-body">"Absolutely love this product! It exceeded all my expectations. The quality is outstanding and shipping was incredibly fast."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 3: Product Benefits -->
+    <section class="w-full bg-secondary">
+        <div class="max-w-[1400px] mx-auto px-5 py-8 md:px-10 md:py-12 lg:px-20 lg:py-16">
+            <div class="flex flex-col lg:flex-row gap-10 lg:gap-16">
+                <!-- Left Column -->
+                <div class="w-full lg:w-[55%]">
+                    <h2 class="text-headingText text-3xl md:text-4xl lg:text-5xl font-heading font-bold leading-tight mb-10 lg:mb-12">
+                        Benefits of daily use
+                    </h2>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-10">
+                        <!-- Benefit 1 -->
+                        <div>
+                            <svg class="w-12 h-12 mb-4" viewBox="0 0 48 48" fill="none" stroke="#8C98CA" stroke-width="1.5">
+                                <circle cx="24" cy="24" r="20"/>
+                                <path d="M24 12c-4 4-8 10-4 16s8 6 4 8" stroke-linecap="round"/>
+                                <path d="M20 20c2-2 6-2 8 0" stroke-linecap="round"/>
+                            </svg>
+                            <h3 class="text-[20px] font-heading font-bold text-headingText mb-3">Wellbeing & Foundational Health</h3>
+                            <p class="text-base font-body font-normal text-gray-300 leading-relaxed">Supports key health areas every day: mental fitness, bones, heart, skin, hair, nails & hormones.</p>
+                        </div>
+
+                        <!-- Benefit 2 -->
+                        <div>
+                            <svg class="w-12 h-12 mb-4" viewBox="0 0 48 48" fill="none" stroke="#8C98CA" stroke-width="1.5">
+                                <circle cx="24" cy="24" r="6"/>
+                                <circle cx="24" cy="8" r="3"/><line x1="24" y1="14" x2="24" y2="18"/>
+                                <circle cx="24" cy="40" r="3"/><line x1="24" y1="30" x2="24" y2="37"/>
+                                <circle cx="10" cy="16" r="3"/><line x1="13" y1="17" x2="19" y2="21"/>
+                                <circle cx="38" cy="16" r="3"/><line x1="35" y1="17" x2="29" y2="21"/>
+                                <circle cx="10" cy="32" r="3"/><line x1="13" y1="31" x2="19" y2="27"/>
+                                <circle cx="38" cy="32" r="3"/><line x1="35" y1="31" x2="29" y2="27"/>
+                            </svg>
+                            <h3 class="text-[20px] font-heading font-bold text-headingText mb-3">Immune System</h3>
+                            <p class="text-base font-body font-normal text-gray-300 leading-relaxed">Copper, folate, selenium, zinc and vitamins A, B12, B6, and C contribute to normal function of the immune system.</p>
+                        </div>
+
+                        <!-- Benefit 3 -->
+                        <div>
+                            <svg class="w-12 h-12 mb-4" viewBox="0 0 48 48" fill="none" stroke="#8C98CA" stroke-width="1.5">
+                                <path d="M6 12h36M6 20h36M6 28h36M6 36h36" stroke-linecap="round"/>
+                            </svg>
+                            <h3 class="text-[20px] font-heading font-bold text-headingText mb-3">Energy Metabolism</h3>
+                            <p class="text-base font-body font-normal text-gray-300 leading-relaxed">Copper, biotin, niacin, pantothenic acid, thiamine and vitamins B2, B12, B6 and C contribute to normal energy-yielding metabolism.</p>
+                        </div>
+
+                        <!-- Benefit 4 -->
+                        <div>
+                            <svg class="w-12 h-12 mb-4" viewBox="0 0 48 48" fill="none" stroke="#8C98CA" stroke-width="1.5">
+                                <path d="M32 16c6 6 6 10 0 16" stroke-linecap="round"/>
+                                <path d="M16 32c-6-6-6-10 0-16" stroke-linecap="round"/>
+                                <path d="M32 16l-4-4m4 4l4-4" stroke-linecap="round"/>
+                                <path d="M16 32l-4 4m4-4l4 4" stroke-linecap="round"/>
+                            </svg>
+                            <h3 class="text-[20px] font-heading font-bold text-headingText mb-3">Muscle Recovery</h3>
+                            <p class="text-base font-body font-normal text-gray-300 leading-relaxed">Copper, selenium and zinc and vitamins B2 and C contribute to the protection of cells from oxidative stress.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column - Lifestyle Image -->
+                <div class="w-full lg:w-[45%]">
+                    <img src="https://nyrslifytgbluamxpqzq.supabase.co/storage/v1/object/public/website-images/ed/benefits-lifestyle.png" alt="Person jogging on a sunlit autumn path" class="w-full h-full min-h-[350px] lg:min-h-[500px] object-cover rounded-2xl" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 4: FAQ -->
+    <section class="w-full bg-white py-12 px-4 lg:py-16 lg:px-8">
+        <div class="max-w-[1400px] mx-auto bg-secondary rounded-3xl p-6 md:p-8 lg:p-16">
+            <div class="flex flex-col lg:flex-row gap-10 lg:gap-16">
+                <!-- Left Column -->
+                <div class="w-full lg:w-[40%] lg:py-4">
+                    <h2 class="text-headingText font-heading font-bold text-3xl lg:text-5xl leading-tight mb-5">
+                        Have Questions? We Have Answers.
+                    </h2>
+                    <p class="text-gray-400 text-base font-body font-normal mb-8 leading-relaxed">
+                        Get quick solutions to your common concerns. Everything you need to know before making your purchase.
+                    </p>
+                    <a href="ed" class="inline-flex items-center gap-2 bg-primary hover:bg-opacity-90 transition-all text-white font-semibold font-body text-base px-8 py-4 rounded-lg">
+                        Get it now <span>→</span>
+                    </a>
+                </div>
+
+                <!-- Right Column - FAQ Accordion -->
+                <div class="w-full lg:w-[60%] space-y-3" id="faq-container">
+                    <div class="faq-item bg-white rounded-xl px-7 py-6">
+                        <button class="faq-trigger w-full flex justify-between items-center cursor-pointer" aria-expanded="false">
+                            <span class="font-bold text-lg text-secondary font-body text-left">What is your return and exchange policy?</span>
+                            <svg class="faq-chevron w-5 h-5 text-secondary flex-shrink-0 ml-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+                        </button>
+                        <div class="faq-answer">
+                            <p class="text-[15px] font-body font-normal text-gray-500 leading-relaxed pt-3">We offer a 30-day return and exchange policy for all unused products in their original packaging. Please contact our support team to initiate a return.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item bg-white rounded-xl px-7 py-6">
+                        <button class="faq-trigger w-full flex justify-between items-center cursor-pointer" aria-expanded="false">
+                            <span class="font-bold text-lg text-secondary font-body text-left">How long does shipping take?</span>
+                            <svg class="faq-chevron w-5 h-5 text-secondary flex-shrink-0 ml-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+                        </button>
+                        <div class="faq-answer">
+                            <p class="text-[15px] font-body font-normal text-gray-500 leading-relaxed pt-3">Standard shipping takes 5–7 business days. Expedited shipping options are available at checkout.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item bg-white rounded-xl px-7 py-6">
+                        <button class="faq-trigger w-full flex justify-between items-center cursor-pointer" aria-expanded="false">
+                            <span class="font-bold text-lg text-secondary font-body text-left">How can I track my order?</span>
+                            <svg class="faq-chevron w-5 h-5 text-secondary flex-shrink-0 ml-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+                        </button>
+                        <div class="faq-answer">
+                            <p class="text-[15px] font-body font-normal text-gray-500 leading-relaxed pt-3">Once your order ships, you'll receive a tracking number via email. You can use it on our website or the carrier's site.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item bg-white rounded-xl px-7 py-6">
+                        <button class="faq-trigger w-full flex justify-between items-center cursor-pointer" aria-expanded="false">
+                            <span class="font-bold text-lg text-secondary font-body text-left">What payment methods do you accept?</span>
+                            <svg class="faq-chevron w-5 h-5 text-secondary flex-shrink-0 ml-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+                        </button>
+                        <div class="faq-answer">
+                            <p class="text-[15px] font-body font-normal text-gray-500 leading-relaxed pt-3">We accept Visa, MasterCard, American Express, PayPal, and Apple Pay.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item bg-white rounded-xl px-7 py-6">
+                        <button class="faq-trigger w-full flex justify-between items-center cursor-pointer" aria-expanded="false">
+                            <span class="font-bold text-lg text-secondary font-body text-left">How do I cancel or modify my order?</span>
+                            <svg class="faq-chevron w-5 h-5 text-secondary flex-shrink-0 ml-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+                        </button>
+                        <div class="faq-answer">
+                            <p class="text-[15px] font-body font-normal text-gray-500 leading-relaxed pt-3">You can cancel or modify your order within 24 hours of placing it by contacting our support team.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item bg-white rounded-xl px-7 py-6">
+                        <button class="faq-trigger w-full flex justify-between items-center cursor-pointer" aria-expanded="false">
+                            <span class="font-bold text-lg text-secondary font-body text-left">Do you ship internationally?</span>
+                            <svg class="faq-chevron w-5 h-5 text-secondary flex-shrink-0 ml-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+                        </button>
+                        <div class="faq-answer">
+                            <p class="text-[15px] font-body font-normal text-gray-500 leading-relaxed pt-3">Yes, we ship to over 50 countries worldwide. International shipping rates and delivery times vary by location.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 5: Image with Text (Bento Grid) -->
+    <section class="w-full bg-white px-6 py-12 lg:px-12 lg:py-16">
+        <div class="max-w-[1400px] mx-auto">
+            <!-- Desktop Grid -->
+            <div class="hidden lg:grid grid-cols-3 grid-rows-2 gap-3">
+                <!-- Cell 1 - Top Left (text) -->
+                <div class="bg-[#F0EDEA] p-8 lg:p-12 flex flex-col justify-center min-h-[350px]">
+                    <h2 class="font-heading font-bold text-3xl text-secondary mb-4">Hand-Woven Artistry</h2>
+                    <p class="font-body font-normal text-[17px] text-bodyText leading-relaxed">Each piece is a testament to heritage, crafted by master artisans in the Atlas Mountains.</p>
+                </div>
+
+                <!-- Cell 2 - Top Center (text) -->
+                <div class="bg-secondary p-8 lg:p-12 flex flex-col justify-center min-h-[350px]">
+                    <h2 class="font-heading font-bold text-3xl text-headingText mb-4">Raw, Natural Fibers</h2>
+                    <p class="font-body font-normal text-[17px] text-gray-300 leading-relaxed">100% live wool, dyed using plant-based pigments for a depth of color that lasts generations.</p>
+                </div>
+
+                <!-- Cell 3 - Right (row-span-2, image) -->
+                <div class="row-span-2">
+                    <img src="https://nyrslifytgbluamxpqzq.supabase.co/storage/v1/object/public/website-images/ed/cell3_image.png" alt="Serene bedroom interior with natural textiles" class="w-full h-full object-cover">
+                </div>
+
+                <!-- Cell 4 - Bottom Left (image) -->
+                <div class="min-h-[350px]">
+                    <img src="https://nyrslifytgbluamxpqzq.supabase.co/storage/v1/object/public/website-images/ed/cell4_image.png" alt="Artisan crafting textile by hand" class="w-full h-full object-cover">
+                </div>
+
+                <!-- Cell 5 - Bottom Center (text) -->
+                <div class="bg-primary p-8 lg:p-12 flex flex-col justify-center min-h-[350px]">
+                    <h2 class="font-heading font-bold text-3xl text-headingText mb-4">The Royal Oak Edition</h2>
+                    <p class="font-body font-normal text-[17px] text-white/80 leading-relaxed">A collaboration of form and texture, designed to bring warmth to the modern home.</p>
+                </div>
+            </div>
+
+            <!-- Tablet Grid -->
+            <div class="hidden md:grid lg:hidden grid-cols-2 gap-3">
+                <div class="bg-[#F0EDEA] p-8 flex flex-col justify-center min-h-[300px]">
+                    <h2 class="font-heading font-bold text-2xl text-secondary mb-4">Hand-Woven Artistry</h2>
+                    <p class="font-body font-normal text-base text-bodyText leading-relaxed">Each piece is a testament to heritage, crafted by master artisans in the Atlas Mountains.</p>
+                </div>
+                <div class="row-span-2">
+                    <img src="https://nyrslifytgbluamxpqzq.supabase.co/storage/v1/object/public/website-images/ed/cell3_image.png" alt="Serene bedroom interior" class="w-full h-full object-cover">
+                </div>
+                <div class="bg-secondary p-8 flex flex-col justify-center min-h-[300px]">
+                    <h2 class="font-heading font-bold text-2xl text-headingText mb-4">Raw, Natural Fibers</h2>
+                    <p class="font-body font-normal text-base text-gray-300 leading-relaxed">100% live wool, dyed using plant-based pigments for a depth of color that lasts generations.</p>
+                </div>
+                <div class="min-h-[300px]">
+                    <img src="https://nyrslifytgbluamxpqzq.supabase.co/storage/v1/object/public/website-images/ed/cell4_image.png" alt="Artisan crafting textile" class="w-full h-full object-cover">
+                </div>
+                <div class="bg-primary p-8 flex flex-col justify-center min-h-[300px] col-span-2">
+                    <h2 class="font-heading font-bold text-2xl text-headingText mb-4">The Royal Oak Edition</h2>
+                    <p class="font-body font-normal text-base text-white/80 leading-relaxed">A collaboration of form and texture, designed to bring warmth to the modern home.</p>
+                </div>
+            </div>
+
+            <!-- Mobile Stack -->
+            <div class="flex flex-col md:hidden gap-3">
+                <div class="bg-[#F0EDEA] p-8 flex flex-col justify-center min-h-[280px]">
+                    <h2 class="font-heading font-bold text-2xl text-secondary mb-4">Hand-Woven Artistry</h2>
+                    <p class="font-body font-normal text-base text-bodyText leading-relaxed">Each piece is a testament to heritage, crafted by master artisans in the Atlas Mountains.</p>
+                </div>
+                <div class="bg-secondary p-8 flex flex-col justify-center min-h-[280px]">
+                    <h2 class="font-heading font-bold text-2xl text-headingText mb-4">Raw, Natural Fibers</h2>
+                    <p class="font-body font-normal text-base text-gray-300 leading-relaxed">100% live wool, dyed using plant-based pigments for a depth of color that lasts generations.</p>
+                </div>
+                <div class="min-h-[300px]">
+                    <img src="https://nyrslifytgbluamxpqzq.supabase.co/storage/v1/object/public/website-images/ed/cell3_image.png" alt="Serene bedroom interior" class="w-full h-full object-cover">
+                </div>
+                <div class="min-h-[280px]">
+                    <img src="https://nyrslifytgbluamxpqzq.supabase.co/storage/v1/object/public/website-images/ed/cell4_image.png" alt="Artisan crafting" class="w-full h-full object-cover">
+                </div>
+                <div class="bg-primary p-8 flex flex-col justify-center min-h-[280px]">
+                    <h2 class="font-heading font-bold text-2xl text-headingText mb-4">The Royal Oak Edition</h2>
+                    <p class="font-body font-normal text-base text-white/80 leading-relaxed">A collaboration of form and texture, designed to bring warmth to the modern home.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 6: How It Works -->
+    <section class="w-full bg-secondary">
+        <div class="max-w-[1200px] mx-auto py-16 px-5 lg:py-20 lg:px-10">
+            <!-- Heading -->
+            <h2 class="font-heading font-bold text-2xl text-headingText text-center mb-16">How It Works</h2>
+
+            <!-- Desktop Layout -->
+            <div class="hidden md:block">
+                <!-- Circles Row -->
+                <div class="flex items-center justify-center mb-0">
+                    <!-- Step 1 Circle -->
+                    <div class="w-[100px] h-[100px] rounded-full border-2 border-primary flex items-center justify-center flex-shrink-0">
+                        <span class="font-heading font-bold text-5xl text-headingText">1</span>
+                    </div>
+                    <!-- Line -->
+                    <div class="flex-1 h-0.5 bg-primary mx-4"></div>
+                    <!-- Step 2 Circle -->
+                    <div class="w-[100px] h-[100px] rounded-full border-2 border-primary flex items-center justify-center flex-shrink-0">
+                        <span class="font-heading font-bold text-5xl text-headingText">2</span>
+                    </div>
+                    <!-- Line -->
+                    <div class="flex-1 h-0.5 bg-primary mx-4"></div>
+                    <!-- Step 3 Circle -->
+                    <div class="w-[100px] h-[100px] rounded-full border-2 border-primary flex items-center justify-center flex-shrink-0">
+                        <span class="font-heading font-bold text-5xl text-headingText">3</span>
+                    </div>
+                </div>
+
+                <!-- Text Row -->
+                <div class="flex justify-between mt-6">
+                    <div class="flex-1 text-center px-4">
+                        <h3 class="font-body font-bold text-[22px] text-headingText mt-6 mb-3">Create Account</h3>
+                        <p class="font-body font-normal text-base text-gray-400 leading-relaxed max-w-[280px] mx-auto">You must be 18+ and eligible to get started. Sign up takes just minutes.</p>
+                    </div>
+                    <div class="flex-1 text-center px-4">
+                        <h3 class="font-body font-bold text-[22px] text-headingText mt-6 mb-3">Set Up Your Profile</h3>
+                        <p class="font-body font-normal text-base text-gray-400 leading-relaxed max-w-[280px] mx-auto">Complete your profile with your details and payment information.</p>
+                    </div>
+                    <div class="flex-1 text-center px-4">
+                        <h3 class="font-body font-bold text-[22px] text-headingText mt-6 mb-3">Start Enjoying</h3>
+                        <p class="font-body font-normal text-base text-gray-400 leading-relaxed max-w-[280px] mx-auto">You'll have full access once your account is approved and ready.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile Layout -->
+            <div class="md:hidden flex flex-col items-center">
+                <!-- Step 1 -->
+                <div class="w-20 h-20 rounded-full border-2 border-primary flex items-center justify-center">
+                    <span class="font-heading font-bold text-4xl text-headingText">1</span>
+                </div>
+                <h3 class="font-body font-bold text-xl text-headingText mt-4 mb-2 text-center">Create Account</h3>
+                <p class="font-body font-normal text-base text-gray-400 leading-relaxed text-center max-w-[280px]">You must be 18+ and eligible to get started. Sign up takes just minutes.</p>
+
+                <!-- Connecting Line -->
+                <div class="w-0.5 h-10 bg-primary my-4"></div>
+
+                <!-- Step 2 -->
+                <div class="w-20 h-20 rounded-full border-2 border-primary flex items-center justify-center">
+                    <span class="font-heading font-bold text-4xl text-headingText">2</span>
+                </div>
+                <h3 class="font-body font-bold text-xl text-headingText mt-4 mb-2 text-center">Set Up Your Profile</h3>
+                <p class="font-body font-normal text-base text-gray-400 leading-relaxed text-center max-w-[280px]">Complete your profile with your details and payment information.</p>
+
+                <!-- Connecting Line -->
+                <div class="w-0.5 h-10 bg-primary my-4"></div>
+
+                <!-- Step 3 -->
+                <div class="w-20 h-20 rounded-full border-2 border-primary flex items-center justify-center">
+                    <span class="font-heading font-bold text-4xl text-headingText">3</span>
+                </div>
+                <h3 class="font-body font-bold text-xl text-headingText mt-4 mb-2 text-center">Start Enjoying</h3>
+                <p class="font-body font-normal text-base text-gray-400 leading-relaxed text-center max-w-[280px]">You'll have full access once your account is approved and ready.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 7: Comparison Table -->
+    <section class="w-full bg-white py-12 px-4 lg:py-16 lg:px-8">
+        <div class="max-w-[1200px] mx-auto bg-[#E8E4F5] rounded-[20px] py-10 px-5 md:py-16 md:px-10">
+            <div class="flex flex-col md:flex-row gap-10 items-center">
+                <!-- Left Side -->
+                <div class="w-full md:w-[40%]">
+                    <h2 class="font-heading font-bold italic text-4xl lg:text-5xl text-secondary leading-tight mb-6">
+                        This is what sets us apart.
+                    </h2>
+                    <p class="font-body font-normal text-lg text-bodyText leading-relaxed mb-8">
+                        Few products offer this level of quality. Ours provides clean, effective results that truly work for you.
+                    </p>
+
+                    <!-- Trust Stars -->
+                    <div class="flex items-center gap-2.5 mb-6">
+                        <div class="flex gap-1">
+                            <span class="w-6 h-6 bg-primary rounded-sm flex items-center justify-center text-white text-xs">★</span>
+                            <span class="w-6 h-6 bg-primary rounded-sm flex items-center justify-center text-white text-xs">★</span>
+                            <span class="w-6 h-6 bg-primary rounded-sm flex items-center justify-center text-white text-xs">★</span>
+                            <span class="w-6 h-6 bg-primary rounded-sm flex items-center justify-center text-white text-xs">★</span>
+                            <span class="w-6 h-6 bg-primary rounded-sm flex items-center justify-center text-white text-xs">★</span>
+                        </div>
+                        <span class="text-sm font-body text-bodyText ml-2">Join 1,000,000+ Happy Customers</span>
+                    </div>
+
+                    <!-- Badge -->
+                    <div class="w-[120px] h-[120px] rounded-full border-4 border-double border-primary bg-white flex flex-col items-center justify-center mx-auto md:mx-0">
+                        <svg class="w-8 h-8 text-primary mb-1" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        <span class="text-[10px] font-bold text-secondary uppercase tracking-wider font-body text-center leading-tight">Premium<br>Quality</span>
+                    </div>
+                </div>
+
+                <!-- Right Side - Comparison Card -->
+                <div class="w-full md:w-[60%] relative">
+                    <div class="bg-white rounded-2xl px-5 md:px-10 py-6 md:py-8 shadow-md">
+                        <!-- Column Headers -->
+                        <div class="grid grid-cols-[1fr_80px_80px] md:grid-cols-[1fr_120px_120px] items-end mb-4 pb-4 border-b border-gray-200">
+                            <div></div>
+                            <div class="text-center relative">
+                                <img src="https://nyrslifytgbluamxpqzq.supabase.co/storage/v1/object/public/website-images/ed/comparison-product.png" alt="Our product" class="w-14 h-14 object-contain mx-auto mb-2 -mt-10 transform -rotate-6">
+                                <span class="font-heading font-bold text-lg md:text-[22px] text-secondary">Our Brand</span>
+                            </div>
+                            <div class="text-center">
+                                <span class="font-heading font-bold italic text-lg md:text-[22px] text-gray-400">Others</span>
+                            </div>
+                        </div>
+
+                        <!-- Feature Rows -->
+                        <div class="grid grid-cols-[1fr_80px_80px] md:grid-cols-[1fr_120px_120px] items-center py-5 border-b border-[#E8E4D4]">
+                            <span class="font-body text-sm md:text-base text-bodyText">Formulated for Results</span>
+                            <div class="flex justify-center">
+                                <span class="w-7 h-7 rounded-full bg-secondary flex items-center justify-center">
+                                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                                </span>
+                            </div>
+                            <div class="flex justify-center text-gray-400 text-xl">👎</div>
+                        </div>
+
+                        <div class="grid grid-cols-[1fr_80px_80px] md:grid-cols-[1fr_120px_120px] items-center py-5 border-b border-[#E8E4D4]">
+                            <span class="font-body text-sm md:text-base text-bodyText">No Artificial Ingredients</span>
+                            <div class="flex justify-center">
+                                <span class="w-7 h-7 rounded-full bg-secondary flex items-center justify-center">
+                                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                                </span>
+                            </div>
+                            <div class="flex justify-center text-gray-400 text-xl">👎</div>
+                        </div>
+
+                        <div class="grid grid-cols-[1fr_80px_80px] md:grid-cols-[1fr_120px_120px] items-center py-5 border-b border-[#E8E4D4]">
+                            <span class="font-body text-sm md:text-base text-bodyText">Premium Quality Standards</span>
+                            <div class="flex justify-center">
+                                <span class="w-7 h-7 rounded-full bg-secondary flex items-center justify-center">
+                                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                                </span>
+                            </div>
+                            <div class="flex justify-center text-gray-400 text-xl">👎</div>
+                        </div>
+
+                        <div class="grid grid-cols-[1fr_80px_80px] md:grid-cols-[1fr_120px_120px] items-center py-5 border-b border-[#E8E4D4]">
+                            <span class="font-body text-sm md:text-base text-bodyText">Great Taste & Experience</span>
+                            <div class="flex justify-center">
+                                <span class="w-7 h-7 rounded-full bg-secondary flex items-center justify-center">
+                                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                                </span>
+                            </div>
+                            <div class="flex justify-center text-gray-400 text-xl">👎</div>
+                        </div>
+
+                        <div class="grid grid-cols-[1fr_80px_80px] md:grid-cols-[1fr_120px_120px] items-center py-5">
+                            <span class="font-body text-sm md:text-base text-bodyText">Easy to Use On the Go</span>
+                            <div class="flex justify-center">
+                                <span class="w-7 h-7 rounded-full bg-secondary flex items-center justify-center">
+                                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                                </span>
+                            </div>
+                            <div class="flex justify-center text-gray-400 text-xl">👎</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Accordion Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const faqTriggers = document.querySelectorAll('.faq-trigger');
+
+            faqTriggers.forEach(function(trigger) {
+                trigger.addEventListener('click', function() {
+                    const currentItem = this.closest('.faq-item');
+                    const currentAnswer = currentItem.querySelector('.faq-answer');
+                    const currentChevron = currentItem.querySelector('.faq-chevron');
+                    const isOpen = this.getAttribute('aria-expanded') === 'true';
+
+                    // Close all items
+                    document.querySelectorAll('.faq-item').forEach(function(item) {
+                        const answer = item.querySelector('.faq-answer');
+                        const chevron = item.querySelector('.faq-chevron');
+                        const btn = item.querySelector('.faq-trigger');
+                        answer.classList.remove('open');
+                        answer.style.maxHeight = '0';
+                        chevron.classList.remove('rotated');
+                        btn.setAttribute('aria-expanded', 'false');
+                    });
+
+                    // If wasn't open, open it
+                    if (!isOpen) {
+                        currentAnswer.classList.add('open');
+                        currentAnswer.style.maxHeight = currentAnswer.scrollHeight + 'px';
+                        currentChevron.classList.add('rotated');
+                        this.setAttribute('aria-expanded', 'true');
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
